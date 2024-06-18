@@ -8,6 +8,7 @@ const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname));
 
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
@@ -18,7 +19,7 @@ app.post("/submit", (req, res) => {
   console.log(enteredLink);
 
   const qrImage = qr.imageSync(enteredLink, { type: "png" });
-  res.writeHead(400, { "Content-Type": "image/png" });
+  res.writeHead(200, { "Content-Type": "image/png" });
   res.end(qrImage, "binary");
 });
 
